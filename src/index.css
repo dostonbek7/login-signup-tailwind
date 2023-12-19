@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+  *:focus{
+    @apply outline-4 outline-dotted outline-cyan-400
+  }
+  .max-container{
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    @apply px-10
+  }
+  html, body{
+    @apply h-full
+  }
+  #root{
+    @apply flex flex-col h-full
+  }
+  main{
+    @apply grow
+  }
+  .animation{
+    @apply transition duration-300
+  }
+  .form-label{
+    @apply block
+  }
+  .form-label span{
+    @apply block mb-2 font-semibold text-black
+  }
+  .form-label input{
+    @apply border-2 border-solid border-cyan-400 px-1 py-2 rounded-md w-full
+  }
+}
