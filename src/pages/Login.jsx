@@ -13,7 +13,7 @@ function Login() {
         ></video>
         <div className="grid place-items-center w-full h-screen bg-black bg-opacity-20">
           <div className="bg-white p-8 bg-opacity-60 rounded-md max-w-md w-full">
-            <h1 className="text-4xl mb-4 text-center text-black">Sign up</h1>
+            <h1 className="text-4xl mb-4 text-center text-black">Login</h1>
             <form className="flex flex-col gap-5">
               <label className="form-label">
                 <span>Your email</span>
