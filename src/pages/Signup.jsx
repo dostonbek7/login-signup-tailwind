@@ -18,8 +18,8 @@ function Signup() {
       email.current.value,
       password.current.value
     );
-    toast.success("You signup successful")
-    form.current.reset();
+    
+    form.current.reset()
   };
   return (
     <>
@@ -34,7 +34,7 @@ function Signup() {
         <div className="grid place-items-center w-full h-screen bg-black bg-opacity-60">
           <div className="bg-white p-8 bg-opacity-60 rounded-md max-w-md w-full">
             <h1 className="text-4xl mb-4 text-center text-black">Sign up</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} ref={form} className="flex flex-col gap-5">
               <label className="form-label">
                 <span>Your name</span>
                 <input

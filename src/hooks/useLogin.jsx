@@ -2,6 +2,7 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from "../firebase/firebaseConfig";
 import { useGlobalContext } from "./useGlobalContext";
+import { toast } from "react-toastify";
 
 function useLogin() {
 
@@ -14,13 +15,14 @@ function useLogin() {
     .then((userCredential) => {
       const user = userCredential.user;
       dispatch({type:'LOGIN', payload: user})
+      toast.success("You login succsessfuly")
     })
     .catch((error) => {
       setError(error)
       const errorCode = error.code;
       const errorMessage = error.message;
       setError(errorMessage);
-      console.log(errorCode, errorMessage);
+      toast.error(errorCode, errorMessage);
     });
   }
 

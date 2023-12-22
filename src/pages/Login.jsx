@@ -12,7 +12,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email.current.value, password.current.value);
-    toast.success("You login succsessfuly")
+    
     form.current.reset();
   }
 
