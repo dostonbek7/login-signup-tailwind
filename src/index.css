@@ -20,7 +20,7 @@
     @apply flex flex-col h-full
   }
   main{
-    @apply grow
+    @apply grow dark:bg-slate-700 relative
   }
   .animation{
     @apply transition duration-300
@@ -32,6 +32,6 @@
     @apply block mb-2 font-semibold text-black
   }
   .form-label input{
-    @apply border-2 border-solid border-cyan-400 px-1 py-2 rounded-md w-full
+    @apply border-2 border-solid border-green-300 px-1 py-2 rounded-md w-full
   }
 }

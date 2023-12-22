@@ -1,12 +1,12 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-function ProtectedRout({ children, user }) {
+function ProtectedRoutes({ children, user }) {
   if (user) {
     return children;
   } else {
-    return <Navigate to="/signup" />;
+    return <Navigate to="/login" />;
   }
 }
 
-export default ProtectedRout;
+export default ProtectedRoutes;

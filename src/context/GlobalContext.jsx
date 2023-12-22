@@ -7,19 +7,23 @@ const reducer = (state, action) => {
   switch (type) {
     case "LOGIN":
       return { ...state, user: payload };
+    case "LOGOUT":
+      return { ...state, user: null };
     case "IS_AUTH_CHANGE":
-      return { ...state, isAuthChange: true };
-      default:
-        return state
+      return { ...state, isAuthReady: true };
+    default:
+      return state;
   }
 };
 
 export function GlobalContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, {
     user: null,
-    isAuthChange: false,
+    isAuthReady: false,
   });
-  return <GlobalContext.Provider value={{...state, dispatch}}>
-    {children}
-  </GlobalContext.Provider>
+  return (
+    <GlobalContext.Provider value={{ ...state, dispatch }}>
+      {children}
+    </GlobalContext.Provider>
+  );
 }
