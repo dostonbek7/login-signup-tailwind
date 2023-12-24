@@ -3,10 +3,11 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 import useLogout from "../hooks/useLogout";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Loader from "./Loader";
 
 function Navbar() {
   const { user } = useGlobalContext();
-  const { logout } = useLogout();
+  const { logout, isPending } = useLogout();
   const handleTheme = () => {
     document.body.classList.toggle("dark");
   };
@@ -27,7 +28,7 @@ function Navbar() {
               onClick={logout}
               className="px-2 py-1 md:px-4 md:py-2 border rounded-md bg-orange-400 animation hover:bg-orange-700 text-white"
             >
-              Logout
+              {isPending ? <Loader/> : 'Logout'}
             </button>
             <Link
               to="signup"
