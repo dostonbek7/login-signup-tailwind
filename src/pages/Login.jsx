@@ -1,10 +1,13 @@
-import bgVideo from "../video/cookin_2.mp4";
-import useLogin from "../hooks/useLogin";
+import bgVideo from "../video/knife.mp4";
+import { useLogin } from "../hooks/useLogin";
 import { useRef } from "react";
-import { toast } from "react-toastify";
+//spinner
+import Loader from "../components/Loader";
+//react-icons
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
-  const { login, user, error } = useLogin();
+  const { login, isPending } = useLogin();
   const password = useRef();
   const email = useRef();
   const form = useRef();
@@ -12,9 +15,9 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email.current.value, password.current.value);
-    
+
     form.current.reset();
-  }
+  };
 
   return (
     <>
@@ -50,12 +53,15 @@ function Login() {
                   placeholder="Enter your password"
                 />
               </label>
-              <button className="btn bg-emerald-600 py-2 px-3 rounded-md text-lg">
-                Login
+              <button className="flex items-center justify-center text-white btn bg-emerald-600 py-2 px-3 rounded-md text-lg">
+                {isPending ? <Loader /> : "Login"}
+              </button>
+              <button className="flex items-center gap-2 justify-center btn bg-emerald-900 py-2 px-3 rounded-md text-lg text-white">
+                <FcGoogle className="text-2xl" /> Enter with Google
               </button>
               <p className="text-center text-base">
-                Don't have an account?{" "}
-                <a className="text-lime-700" href="/signup">
+                Don't have an account?
+                <a className="text-lime-700 ml-2" href="/signup">
                   Signup
                 </a>
               </p>

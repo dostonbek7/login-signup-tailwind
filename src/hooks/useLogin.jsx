@@ -1,33 +1,55 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { useGlobalContext } from "./useGlobalContext";
 import { toast } from "react-toastify";
 
 function useLogin() {
-
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const { dispatch } = useGlobalContext()
+  const [isPending, setIsPending] = useState(false);
+  const { dispatch } = useGlobalContext();
 
-  const login = (email, password)=>{
+  const login = (email, password) => {
+    setIsPending(true);
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      dispatch({type:'LOGIN', payload: user})
-      toast.success("You login succsessfuly")
-    })
-    .catch((error) => {
-      setError(error)
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      setError(errorMessage);
-      toast.error(errorCode, errorMessage);
-    });
-  }
+      .then((userCredential) => {
+        const user = userCredential.user;
+        dispatch({ type: "LOGIN", payload: user });
+        toast.success("You login succsessfuly");
+        setIsPending(false);
+      })
+      .catch((error) => {
+        setError(error);
+        const errorMessage = error.message;
+        setError(errorMessage);
+        toast.error("Incorrect email or password");
+        setIsPending(false);
+      });
+  };
+  const enterWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        dispatch({ type: "LOGIN", payload: user });
+        setIsPending(false);
+        setError(null);
+        toast.success("Well come back");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        setError(errorMessage);
+      });
+  };
 
-
-  return {login, user, error}
+  return { login, error, isPending, enterWithGoogle };
 }
 
-export default useLogin
+export { useLogin };

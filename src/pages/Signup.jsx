@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
 import BgVideo from "../video/cooking.mp4";
 import useSignup from "../hooks/useSignup";
 import { useRef } from "react";
-import { toast } from "react-toastify";
+import Loader from "../components/Loader";
+// icons
+import { FcGoogle } from "react-icons/fc";
 
 function Signup() {
-  const { user, error, signup } = useSignup();
+  const { error, isPending, signup } = useSignup();
   const form = useRef();
   const displayName = useRef();
   const email = useRef();
@@ -18,8 +19,8 @@ function Signup() {
       email.current.value,
       password.current.value
     );
-    
-    form.current.reset()
+
+    form.current.reset();
   };
   return (
     <>
@@ -34,7 +35,11 @@ function Signup() {
         <div className="grid place-items-center w-full h-screen bg-black bg-opacity-60">
           <div className="bg-white p-8 bg-opacity-60 rounded-md max-w-md w-full">
             <h1 className="text-4xl mb-4 text-center text-black">Sign up</h1>
-            <form onSubmit={handleSubmit} ref={form} className="flex flex-col gap-5">
+            <form
+              onSubmit={handleSubmit}
+              ref={form}
+              className="flex flex-col gap-5"
+            >
               <label className="form-label">
                 <span>Your name</span>
                 <input
@@ -59,8 +64,15 @@ function Signup() {
                   placeholder="Enter your password"
                 />
               </label>
-              <button className="btn bg-emerald-600 py-2 px-3 rounded-md text-lg">
-                Signup
+              <button className=" flex items-center justify-center btn bg-emerald-700 text-white py-2 px-3 rounded-md text-lg">
+                {isPending ? (
+                 <Loader/>
+                ) : (
+                  "Signup"
+                )}
+              </button>
+              <button className="flex items-center gap-2 justify-center btn bg-emerald-900 py-2 px-3 rounded-md text-lg text-white">
+                <FcGoogle className="text-2xl"/> Enter with Google
               </button>
               <p className="text-center text-base">
                 Already have an account?{" "}
