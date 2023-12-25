@@ -34,7 +34,7 @@ function Navbar() {
               to="signup"
               className="px-2 py-1 md:px-4 md:py-2 border rounded-md bg-green-600 animation hover:bg-green-800 text-white"
             >
-              Signup
+              Create
             </Link>
             <button onClick={handleTheme}>
               <FaMoon className="text-2xl" />
