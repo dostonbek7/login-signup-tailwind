@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 import { FcGoogle } from "react-icons/fc";
 
 function Login() {
-  const { login, isPending } = useLogin();
+  const { login, isPending, enterWithGoogle } = useLogin();
   const password = useRef();
   const email = useRef();
   const form = useRef();
@@ -17,6 +17,10 @@ function Login() {
     login(email.current.value, password.current.value);
 
     form.current.reset();
+  };
+  const handleWithGoogle = (e) => {
+    e.preventDefault();
+    enterWithGoogle();
   };
 
   return (
@@ -56,7 +60,10 @@ function Login() {
               <button className="flex items-center justify-center text-white btn bg-emerald-600 py-2 px-3 rounded-md text-lg">
                 {isPending ? <Loader /> : "Login"}
               </button>
-              <button className="flex items-center gap-2 justify-center btn bg-emerald-900 py-2 px-3 rounded-md text-lg text-white">
+              <button
+                onClick={handleWithGoogle}
+                className="flex items-center gap-2 justify-center btn bg-emerald-900 py-2 px-3 rounded-md text-lg text-white"
+              >
                 <FcGoogle className="text-2xl" /> Enter with Google
               </button>
               <p className="text-center text-base">

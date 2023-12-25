@@ -9,6 +9,7 @@ import { useGlobalContext } from "./hooks/useGlobalContext"
 //firebase
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
+import Home from "./pages/Home";
 
 function App() {
   const { user, isAuthReady, dispatch } = useGlobalContext();
@@ -20,6 +21,12 @@ function App() {
           <MainLayout />,
         </ProtectedRoutes>
       ),
+      children:[
+        {
+          index: true,
+          element: <Home/>
+        }
+      ]
     },
     {
       path: "login",
